@@ -1,0 +1,5 @@
+P2 | Book | 500 | 10
+P5 | Phone | 200 | 200
+P4 | Computer | 10 | 1000
+P1 | Tablet | 15 | 700
+P100 | test | 10 | 10
