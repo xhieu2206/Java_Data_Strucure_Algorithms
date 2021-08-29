@@ -12,7 +12,6 @@ public class Main {
         graph.breadthFirstTraversal(0);
         System.out.println("=============");
         Boolean[] visitedArray = new Boolean[graph.getNumberOfVertices()];
-        Arrays.fill(visitedArray, Boolean.FALSE);
         graph.depthFirstTraversalLogging(0, new Stack(graph.getNumberOfVertices()), visitedArray);
         System.out.println("=============");
         System.out.println("Number of group: " + graph.numberOfComponents());

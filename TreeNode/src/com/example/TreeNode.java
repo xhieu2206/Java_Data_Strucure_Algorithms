@@ -1,7 +1,5 @@
 package com.example;
 
-import com.sun.source.tree.Tree;
-
 public class TreeNode {
     private Integer data;
     private TreeNode leftChild;
