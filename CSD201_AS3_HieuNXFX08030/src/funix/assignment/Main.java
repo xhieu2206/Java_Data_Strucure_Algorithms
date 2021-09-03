@@ -19,30 +19,32 @@ public class Main {
         WeightedGraph graph = new WeightedGraph(7);
 
         /* Các cạnh đi từ đỉnh A */
-        graph.setEdge(graph.getMapStringToIndex().get('A'), graph.getMapStringToIndex().get('C'), 30);
-        graph.setEdge(graph.getMapStringToIndex().get('A'), graph.getMapStringToIndex().get('D'), 20);
-        graph.setEdge(graph.getMapStringToIndex().get('A'), graph.getMapStringToIndex().get('F'), 8);
+        graph.setEdge(graph.getMapStringToIndex().get('A'), graph.getMapStringToIndex().get('B'), 10);
         graph.setEdge(graph.getMapStringToIndex().get('A'), graph.getMapStringToIndex().get('G'), 8);
 
         /* Các cạnh đi từ đỉnh B */
-        graph.setEdge(graph.getMapStringToIndex().get('B'), graph.getMapStringToIndex().get('A'), 10);
+        graph.setEdge(graph.getMapStringToIndex().get('B'), graph.getMapStringToIndex().get('C'), 2);
+        graph.setEdge(graph.getMapStringToIndex().get('B'), graph.getMapStringToIndex().get('D'), 10);
+        graph.setEdge(graph.getMapStringToIndex().get('B'), graph.getMapStringToIndex().get('E'), 25);
+        graph.setEdge(graph.getMapStringToIndex().get('B'), graph.getMapStringToIndex().get('F'), 80);
 
         /* Các cạnh đi từ đỉnh C */
-        graph.setEdge(graph.getMapStringToIndex().get('C'), graph.getMapStringToIndex().get('B'), 2);
+        graph.setEdge(graph.getMapStringToIndex().get('C'), graph.getMapStringToIndex().get('A'), 30);
+        graph.setEdge(graph.getMapStringToIndex().get('C'), graph.getMapStringToIndex().get('D'), 8);
+        graph.setEdge(graph.getMapStringToIndex().get('C'), graph.getMapStringToIndex().get('E'), 3);
+        graph.setEdge(graph.getMapStringToIndex().get('C'), graph.getMapStringToIndex().get('F'), 20);
 
         /* Các cạnh đi từ đỉnh D */
-        graph.setEdge(graph.getMapStringToIndex().get('D'), graph.getMapStringToIndex().get('B'), 10);
-        graph.setEdge(graph.getMapStringToIndex().get('D'), graph.getMapStringToIndex().get('C'), 8);
-        graph.setEdge(graph.getMapStringToIndex().get('D'), graph.getMapStringToIndex().get('E'), 4);
+        graph.setEdge(graph.getMapStringToIndex().get('D'), graph.getMapStringToIndex().get('A'), 20);
+        graph.setEdge(graph.getMapStringToIndex().get('D'), graph.getMapStringToIndex().get('F'), 5);
+        graph.setEdge(graph.getMapStringToIndex().get('D'), graph.getMapStringToIndex().get('G'), 10);
 
         /* Các cạnh đi từ đỉnh E */
-        graph.setEdge(graph.getMapStringToIndex().get('E'), graph.getMapStringToIndex().get('B'), 25);
-        graph.setEdge(graph.getMapStringToIndex().get('E'), graph.getMapStringToIndex().get('C'), 3);
+        graph.setEdge(graph.getMapStringToIndex().get('E'), graph.getMapStringToIndex().get('D'), 4);
 
         /* Các cạnh đi từ đỉnh F */
-        graph.setEdge(graph.getMapStringToIndex().get('F'), graph.getMapStringToIndex().get('B'), 80);
-        graph.setEdge(graph.getMapStringToIndex().get('F'), graph.getMapStringToIndex().get('C'), 20);
-        graph.setEdge(graph.getMapStringToIndex().get('F'), graph.getMapStringToIndex().get('C'), 5);
+        graph.setEdge(graph.getMapStringToIndex().get('F'), graph.getMapStringToIndex().get('A'), 8);
+        graph.setEdge(graph.getMapStringToIndex().get('F'), graph.getMapStringToIndex().get('G'), 5);
 
         /* Các cạnh đi từ đỉnh G */
         graph.setEdge(graph.getMapStringToIndex().get('G'), graph.getMapStringToIndex().get('A'), 8);
@@ -128,10 +130,9 @@ public class Main {
                     }
                     case 8 -> {
                         LogMenu.log("Choice 8: Dijkstra.");
-                        LogMenu.log("The shortest ");
-
-
-
+                        LogMenu.log("The shortest way from A to E is: ");
+                        graph.dijkstra('A', 'E');
+                        LogMenu.log("");
                         LogMenu.log("Successfully");
                     }
                     default -> LogMenu.log("Please enter a number with range from 0 to 8");

@@ -15,7 +15,7 @@ public class Stack {
         return top == maxSize;
     }
 
-    private boolean isEmpty() {
+    public boolean isEmpty() {
         return top == -1;
     }
 
