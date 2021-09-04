@@ -74,6 +74,12 @@ public class BinarySearchTree {
         }
     }
 
+    public void traversalPostOrder() {
+        if (root != null) {
+            root.traversalPostOrder();
+        }
+    }
+
     /* method để tính số lượng các nodes trong cây nhị phân, sử dụng đệ quy để duyệt qua các node này, sau mỗi lần duyệt 1 phần tử thì tăng length lên 1 nếu như node đó chưa bị xóa khỏi cây nhị phân */
     public void length() {
         if (root != null) {

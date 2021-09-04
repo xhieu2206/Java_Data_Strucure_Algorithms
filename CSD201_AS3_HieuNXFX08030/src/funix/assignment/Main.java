@@ -81,6 +81,10 @@ public class Main {
                         binarySearchTree.length();
                         LogMenu.log("Total of people: " + binarySearchTree.getTotal());
                         binarySearchTree.traversalInOrder();
+                        LogMenu.log("Traversal Post-Order (Advanced requirement): ");
+                        binarySearchTree.traversalPostOrder();
+                        LogMenu.log("Traversal Pre-Order (Advanced requirement): ");
+                        binarySearchTree.traversalPreOrder();
                         LogMenu.log("Successfully");
                     }
                     case 3 -> {
@@ -107,9 +111,9 @@ public class Main {
                     }
                     case 6 -> {
                         LogMenu.log("Choice 6: Balancing Binary Search Tree.");
-                        LogMenu.log("This is how the binary search tree looked before balancing");
+                        LogMenu.log("This is how the binary search tree looked before balancing, using Pre-order traversal");
                         binarySearchTree.traversalPreOrder();
-                        LogMenu.log("This is how the binary search tree looked after balancing:");
+                        LogMenu.log("This is how the binary search tree looked after balancing, using Pre-order traversal:");
                         binarySearchTree.buildTree(binarySearchTree.getRoot());
                         LogMenu.log("New root node of balanced tree: " + binarySearchTree.getRoot().getPerson());
                         binarySearchTree.traversalPreOrder();
@@ -126,10 +130,14 @@ public class Main {
                         graph.depthFirstTraversal(graph.getMapStringToIndex().get('A'), new Stack(graph.getNumberOfVertices()), visitedArray);
 
                         LogMenu.log("");
+                        LogMenu.log("Breadth First Traversal start from A (Advanced requirement): ");
+                        graph.breadthFirstTraversal('A');
+                        LogMenu.log("");
                         LogMenu.log("Successfully");
                     }
                     case 8 -> {
                         LogMenu.log("Choice 8: Dijkstra.");
+                        graph.graphDisplay();
                         LogMenu.log("The shortest way from A to E is: ");
                         graph.dijkstra('A', 'E');
                         LogMenu.log("");
