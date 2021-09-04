@@ -138,10 +138,24 @@ public class TreeNode {
             System.out.println(this.person.toString());
         }
         if (this.getLeftChild() != null) {
-            this.getLeftChild().traversalInOrder();
+            this.getLeftChild().traversalPreOrder();
         }
         if (this.getRightChild() != null) {
-            this.getRightChild().traversalInOrder();
+            this.getRightChild().traversalPreOrder();
+        }
+    }
+
+    /* Post-Order traversal */
+    public void traversalPostOrder() {
+        if (this.getLeftChild() != null) {
+            this.getLeftChild().traversalPostOrder();
+        }
+        if (this.getRightChild() != null) {
+            this.getRightChild().traversalPostOrder();
+        }
+        if (!this.isDeleted) {
+            /* chỉ in ra node nếu như node này chưa bị deleted khỏi tree */
+            System.out.println(this.person.toString());
         }
     }
 }

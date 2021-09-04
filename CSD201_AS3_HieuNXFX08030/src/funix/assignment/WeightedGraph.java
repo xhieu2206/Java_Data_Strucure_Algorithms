@@ -1,5 +1,6 @@
 package funix.assignment;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,6 +72,35 @@ public class WeightedGraph {
         stack.pop();
     }
 
+    /* Duyệt đồ thị theo chiều rộng */
+    public void breadthFirstTraversal(char vertexString) {
+        /* chuyển từ đỉnh dạng letter sang index */
+        int startVertex = this.mapStringToIndex.get(vertexString);
+
+        /* Tạo một mảng rỗng để đánh dấu các đỉnh đã đi qua, ban đầu các đỉnh sẽ được đánh dấu là FALSE, vì chưa có đỉnh nào được duyệt qua */
+        Boolean[] visitedVertexArr = new Boolean[this.numberOfVertices];
+        Arrays.fill(visitedVertexArr, Boolean.FALSE);
+
+        /* tạo một queue để đẩy các đỉnh được duyệt vào queue này, mỗi khi thực hiện duyệt các đỉnh liền kề của đỉnh này xong, chúng ta sẽ dequeue đỉnh đó đi và duyệt tiếp ở đỉnh đầu tiên */
+        QueueInteger queue = new QueueInteger(this.numberOfVertices);
+
+        /* đưa đỉnh startVertex vào queue và thực hiện duyệt các đỉnh liền kề với đỉnh này, đồng thời đánh dấu đỉnh này đã được visited */
+        queue.enqueue(startVertex);
+        visitedVertexArr[startVertex] = true;
+
+        while (!queue.isEmpty()) {
+            for (int j = 0; j < numberOfVertices; j++) {
+                /* kiểm tra nếu có đường đi từ đỉnh đầu tiên trong queue đến các đỉnh còn lại, nếu như đó là đỉnh liền kề và chưa được visted, đánh dấu là visited và thêm vào queue */
+                if (this.edge[queue.peek()][j] > 0 && this.edge[queue.peek()][j] < 9999 && !visitedVertexArr[j]) {
+                    visitedVertexArr[j] = true;
+                    queue.enqueue(j);
+                }
+            }
+            /* Thực hiện bỏ đỉnh đầu tiên ra khỏi queue, đồng thời in tên thành phố tương ứng với đỉnh đó */
+            System.out.print(this.mapIndexToString.get(queue.dequeue()) + " ");
+        }
+    }
+
     /* method để kiểm tra xem đã thử đi qua hết các đỉnh chưa */
     static boolean isVisitedALlVertex(TrackingNode[] trackingNodes) {
         for (TrackingNode node : trackingNodes) {
@@ -134,6 +164,28 @@ public class WeightedGraph {
         while (!result.isEmpty()) {
             System.out.print(this.mapIndexToString.get(result.pop()) + " ");
         }
+        System.out.println();
+        System.out.println("Total weighted of shortest path from " + v1 + " to " + v2 + ": " + trackingNodes[this.mapStringToIndex.get(v2)].getWeight());
+        System.out.println("Dijkstra algorithm for shortest path from " + v1 + " to other vertex:");
+        for (int i = 0; i < trackingNodes.length; i++) {
+            System.out.println("From " + v1 + " to " + this.mapIndexToString.get(i) + " is " + trackingNodes[i].getWeight());
+        }
+    }
+
+    public void graphDisplay() {
+        LogMenu.log("The weighted matrix of the graph:");
+        LogMenu.createBreakLine();
+        for (int i = 0; i < this.numberOfVertices; i++) {
+            for (int j = 0; j < this.numberOfVertices; j++) {
+                if (this.edge[i][j] == EDGE_NOT_FOUND_WEIGHT) {
+                    System.out.print("INF" + "    ");
+                } else {
+                    System.out.print(this.edge[i][j] + "    ");
+                }
+            }
+            System.out.println();
+        }
+        LogMenu.createBreakLine();
     }
 }
 
@@ -165,4 +217,63 @@ class TrackingNode {
     public void setPreviousVertex(int previousVertex) {
         this.previousVertex = previousVertex;
     }
+}
+
+class QueueInteger {
+    private int head;
+    private int tail;
+    private final int maxSize;
+    private final int[] arr;
+
+    public QueueInteger(int max) {
+        this.maxSize = max;
+        this.arr = new int[maxSize];
+        this.head = -1;
+        this.tail = -1;
+    }
+
+    public void enqueue(int data) {
+        if ((tail + 1) % maxSize == head) {
+            System.out.println("Queue if full!");
+        } else {
+            tail = (tail + 1) % maxSize;
+            arr[tail] = data;
+            if (head == -1) {
+                head = tail;
+            }
+        }
+    }
+
+    public int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty");
+            return -1;
+        } else {
+            int item = arr[head];
+            if (head == tail) {
+                head = -1;
+                tail = -1;
+            } else {
+                head = (head + 1) % maxSize;
+            }
+            return item;
+        }
+    }
+
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty!");
+            return -1;
+        }
+        return this.arr[this.head];
+    }
+
+    public int length() {
+        return Math.abs(this.head - this.tail) + 1;
+    }
+
+    public boolean isEmpty() {
+        return head == -1;
+    }
+
 }
